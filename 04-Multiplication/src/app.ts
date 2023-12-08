@@ -7,8 +7,7 @@ import { ServerApp } from './presentation/server-app';
 })();
 
 async function main() {
-  const { b: base, s: show, l: limit } = yarg;
+  const { b: base, s: show, l: limit, n: fileName, d: fileDestination } = yarg;
   // createTable(base, show, limit).then(console.log).catch(console.log);
-  ServerApp.run({base, show, limit});
-
+  ServerApp.run({ base, show, limit, fileName, fileDestination });
 }
