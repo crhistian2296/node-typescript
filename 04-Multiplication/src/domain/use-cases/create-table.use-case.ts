@@ -23,7 +23,8 @@ export class CreateTable implements CreateTableUseCase {
 ${`========================`.rainbow}\n\n`;
 
     for (let i = 1; i <= limit; i++) {
-      table += `${base} ${`x`.blue} ${i} ${`=`.blue} ${i * base}\n`;
+      table += `${base} ${`x`.blue} ${i} ${`=`.blue} ${i * base}`;
+      if (i < limit) table += '\n';
     }
     return table;
   }
