@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from "fs";
 export interface SaveFileUseCase {
   execute: (options: Options) => boolean;
 }
@@ -12,14 +12,18 @@ export interface Options {
 export class SaveFile implements SaveFileUseCase {
   constructor(/** StorageRepository */) {}
 
-  execute({ fileContent, fileDestination = 'outputs', fileName = 'table' }: Options) {
+  execute({
+    fileContent,
+    fileDestination = "outputs",
+    fileName = "table",
+  }: Options) {
     try {
       fs.mkdirSync(fileDestination, { recursive: true });
       fs.writeFileSync(`${fileDestination}/${fileName}.txt`, fileContent);
 
       return true;
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       return false;
     }
   }
