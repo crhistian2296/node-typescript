@@ -40,8 +40,6 @@ describe("Test args.plugin.ts", () => {
       "custom-destination",
     ]);
 
-    console.log(argv);
-
     expect(argv).toEqual(
       expect.objectContaining({
         b: 3,
