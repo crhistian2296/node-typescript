@@ -50,4 +50,64 @@ describe("Test args.plugin.ts", () => {
       }),
     );
   });
+
+  test("should throw error if base isNaN", async () => {
+    const helpText = `Options:
+      --help         Show help                                         [boolean]
+      --version      Show version number                               [boolean]
+  -b, --base         Take the base to return the determinate multiplication tabl
+                     e                                       [number] [required]
+  -s, --show         Returns the multiplication table in console
+                                                      [boolean] [default: false]
+  -l, --limit        Returns many multiplication tables   [number] [default: 10]
+  -n, --name         Give a name to the returned table    [string] [default: ""]
+  -d, --destination  File destination              [string] [default: "outputs"]
+
+The base must be a number`;
+    try {
+      const argv = await runCommand([
+        "-b",
+        "an",
+        "-s",
+        "-l",
+        "20",
+        "-n",
+        "custom-table-name",
+        "-d",
+        "custom-destination",
+      ]);
+      expect(
+        await runCommand([
+          "-b",
+          "an",
+          "-s",
+          "-l",
+          "20",
+          "-n",
+          "custom-table-name",
+          "-d",
+          "custom-destination",
+        ]),
+      ).toHaveResolvedWith(helpText);
+      expect(
+        await runCommand([
+          "-b",
+          "as",
+          "-s",
+          "-l",
+          "20",
+          "-n",
+          "custom-table-name",
+          "-d",
+          "custom-destination",
+        ]),
+      ).toHaveLastResolvedWith("The base must be a number");
+    } catch (error) {
+      if (error instanceof Error) {
+        expect(error.message).toEqual(
+          'process.exit unexpectedly called with "1"',
+        );
+      }
+    }
+  });
 });
