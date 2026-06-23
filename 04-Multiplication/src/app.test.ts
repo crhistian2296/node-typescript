@@ -1,4 +1,4 @@
-import { vitest } from "vitest";
+import { describe, expect, test, vitest } from "vitest";
 import { ServerApp } from "./presentation/server-app";
 
 describe("Test app.ts", async () => {
@@ -31,6 +31,5 @@ describe("Test app.ts", async () => {
       fileName: "test-file",
       fileDestination: "test-path",
     });
-
-  }
+  });
 });
