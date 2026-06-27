@@ -1,0 +1,9 @@
+import { Server } from "./presentation/server.js";
+
+(async () => {
+  await main();
+})();
+
+async function main() {
+  await Server.start();
+}
