@@ -11,7 +11,9 @@ const endpoint = "http://localhost:3000/";
 
 export class Server {
   public static async start() {
-    console.log("Server started");
+    console.log("Server started...");
+
+    // Mandar email
 
     CronService.createJob("*/5 * * * * *", () => {
       console.log("Cron job executed every 5 seconds", new Date());
