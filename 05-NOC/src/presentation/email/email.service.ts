@@ -27,14 +27,13 @@ export class EmailService {
     const { to, subject, htmlBody, attachments = [] } = options;
 
     try {
+      // Send the email using the transporter
       const sentInfo = await this.transporter.sendMail({
         to,
         subject,
         html: htmlBody,
         attachments,
       });
-
-      console.log(sentInfo);
 
       return true;
     } catch (error) {
