@@ -1,5 +1,6 @@
 import { envs } from "./config/plugins/envs.plugin.js";
-import { LogModel, MongoDatabase } from "./data/mongo/index.js";
+import { MongoDatabase } from "./data/mongo/index.js";
+import { Server } from "./presentation/server.js";
 (async () => {
   await main();
 })();
@@ -9,18 +10,21 @@ async function main() {
     mongoUrl: envs.MONGO_URL,
     dbName: envs.MONGO_DB_NAME,
   });
+
+  Server.start();
+
   // Crear una coleccion = tabla, documento = registro
-  const newLog = await LogModel.create({
-    message: "Test message desde MongoDB",
-    origin: "App.ts",
-    level: "low",
-  });
+  // const newLog = await LogModel.create({
+  //   message: "Test message desde MongoDB",
+  //   origin: "App.ts",
+  //   level: "low",
+  // });
 
   // await newLog.save();
 
   // console.log(newLog);
-  const logs = await LogModel.find();
-  console.log("logs", logs);
+  // const logs = await LogModel.find();
+  // console.log("logs", logs);
 
   // await Server.start();
   // console.log("process.env.MAILER_EMAIL", envs.MAILER_EMAIL);

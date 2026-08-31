@@ -26,12 +26,30 @@ export class LogEntity {
     this.origin = origin;
   }
 
-  // "{"level":"low","message":"This is a low severity log","createdAt":"2023-06-01T12:00:00.000Z"}"
-  static fromJson(json: string): LogEntity {
-    const { message, level, createdAt, origin } = JSON.parse(json);
+  private static objLogIsValid(log: LogEntityOptions): boolean {
+    const { message, level, createdAt, origin } = log;
 
-    // const { parsedMessage, parsedLevel, parsedCreatedAt } =
-    //   this.formatValidation(level, message, createdAt);
+    if (!level || !message || !createdAt || !origin) return false;
+    return true;
+  }
+
+  // "{"level":"low","message":"This is a low severity log","createdAt":"2023-06-01T12:00:00.000Z"}"
+  static fromData<T extends string | Record<string, any>>(data: T): LogEntity {
+    let obj: Record<string, any>;
+
+    // Si es string, parsear JSON
+    if (typeof data === "string") {
+      obj = data.length ? JSON.parse(data) : {};
+    } else {
+      // Si es objeto, usar directamente
+      obj = data;
+    }
+
+    const { message, level, createdAt, origin } = obj;
+
+    if (!LogEntity.objLogIsValid(obj as LogEntityOptions)) {
+      throw new Error(`Invalid log object: ${JSON.stringify(obj)}`);
+    }
 
     const log = new LogEntity({
       level,
@@ -39,23 +57,7 @@ export class LogEntity {
       createdAt,
       origin,
     });
+
     return log;
   }
-
-  // private static formatValidation(level: any, message: any, createdAt: any) {
-  //   if (
-  //     !level ||
-  //     !Object.values(LogSeverityLevel).includes(level as LogSeverityLevel) ||
-  //     !message ||
-  //     typeof message !== "string" ||
-  //     !createdAt ||
-  //     !(new Date(createdAt) instanceof Date)
-  //   )
-  //     throw new Error("Invalid log format");
-
-  //   const parsedCreatedAt = new Date(createdAt);
-  //   const parsedMessage = message as string;
-  //   const parsedLevel = level as LogSeverityLevel;
-  //   return { parsedMessage, parsedLevel, parsedCreatedAt };
-  // }
 }
