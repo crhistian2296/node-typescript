@@ -7,5 +7,5 @@ dist/
 /.claude
 /.cursor
 /.devin
-/prisma/contract.dts
-/prisma/contract.json
+src/prisma/contract.d.ts
+src/prisma/contract.json
