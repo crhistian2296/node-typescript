@@ -1,8 +1,9 @@
-/mongo
-/postgres
+/mongo*
+/postgres*
 node_modules/
 dist/
 .env
+.env.test
 /.agents
 /.claude
 /.cursor

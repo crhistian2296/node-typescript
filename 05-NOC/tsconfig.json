@@ -1,8 +1,6 @@
 {
   "compilerOptions": {
-    "types": [
-      "node"
-    ],
+    "types": ["node"],
     "target": "ES2022",
     "module": "preserve",
     "moduleResolution": "bundler",
@@ -14,6 +12,6 @@
     "sourceMap": true,
     "resolveJsonModule": true
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "test-env.setup.ts"],
   "exclude": ["node_modules", "dist"]
 }
