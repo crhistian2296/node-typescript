@@ -26,9 +26,9 @@ enum SeverityLevel {
 }
 
 model LogModel {
-  id        Int           @id @default(autoincrement())
+  id        Int               @id @default(autoincrement())
   message   String
   origin    String
   level     SeverityLevel
-  createdAt DateTime      @default(now())
+  createdAt TimestamptzString @default(now())
 }

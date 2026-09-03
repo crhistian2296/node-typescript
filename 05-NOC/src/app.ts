@@ -11,6 +11,15 @@ async function main() {
     dbName: envs.MONGO_DB_NAME,
   });
 
+  // const prisma = db.orm.public;
+
+  // const logs = await prisma.LogModel.create({
+  //   level: "MEDIUM",
+  //   message: "Test message desde Postgres",
+  //   origin: "App.ts",
+  // });
+
+  // console.log("Logs:", logs);
   Server.start();
 
   // Crear una coleccion = tabla, documento = registro
