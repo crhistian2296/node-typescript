@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { afterEach, beforeAll, describe, expect, test } from "vitest";
 import { LogSeverityLevel } from "../../../domain/entities/log.entity";
 import { MongoDatabase } from "../init";
 import { LogModel } from "./log.model";

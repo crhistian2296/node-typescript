@@ -1,4 +1,4 @@
-import { LogDataSource } from "../../domain/datasources/log.datasources.js";
+import { LogDataSource } from "../../domain/datasources/log.datasource.js";
 import {
   LogEntity,
   LogSeverityLevel,
