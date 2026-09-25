@@ -8,9 +8,10 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "docker:test": "docker compose -f docker-compose.test.yml --env-file .env.test up -d",
-    "test": "pnpm run docker:test && vitest",
-    "test:watch": "pnpm run docker:test && vitest --watch",
-    "test:coverage": "pnpm run docker:test && vitest --coverage",
+    "db:test:migrate": "node --env-file=.env.test node_modules/prisma/dist/prisma.js db migrate",
+    "test": "pnpm run docker:test && pnpm run db:test:migrate && vitest",
+    "test:watch": "pnpm run docker:test && pnpm run db:test:migrate && vitest --watch",
+    "test:coverage": "pnpm run docker:test && pnpm run db:test:migrate && vitest --coverage",
     "contract:emit": "prisma contract emit",
     "format:prisma": "prisma contract format"
   },
