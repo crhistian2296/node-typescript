@@ -48,6 +48,7 @@ export class LogEntity {
     const { message, level, createdAt, origin } = obj;
 
     if (!LogEntity.objLogIsValid(obj as LogEntityOptions)) {
+      console.log(obj);
       throw new Error(`Invalid log object: ${JSON.stringify(obj)}`);
     }
 

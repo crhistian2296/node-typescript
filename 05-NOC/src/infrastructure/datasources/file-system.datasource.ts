@@ -47,7 +47,10 @@ export class FileSystemDatasource implements LogDataSource {
   private getLogsFromFile = (filePath: string): LogEntity[] => {
     const fileContent = fs.readFileSync(filePath, "utf-8");
     if (!fileContent) return [];
-    const logsAsEntities = fileContent.split("\n").map(LogEntity.fromData);
+    const logsAsStringArray = fileContent.split("\n");
+    // Eliminamos salto de linea final del archivo de logs
+    logsAsStringArray.length--;
+    const logsAsEntities = logsAsStringArray.map(LogEntity.fromData);
 
     return logsAsEntities;
   };
