@@ -2,7 +2,7 @@
   "compilerOptions": {
     "types": ["node", "vitest/globals"],
     "target": "ES2022",
-    "module": "preserve",
+    "module": "esnext",
     "moduleResolution": "bundler",
     "outDir": "./dist",
     "rootDir": ".",
@@ -10,6 +10,7 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "sourceMap": true,
+    "ignoreDeprecations": "6.0",
     "resolveJsonModule": true
   },
   "include": ["src/**/*", "test-env.setup.ts"],
