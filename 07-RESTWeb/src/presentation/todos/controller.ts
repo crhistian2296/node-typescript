@@ -1,6 +1,6 @@
 import { type Request, type Response } from "express";
-import { prisma } from "../../data/postgres";
-import { CreateTodoDto, UpdateTodoDto } from "../../domain/dtos";
+import { prisma } from "../../data/postgres/index.js";
+import { CreateTodoDto, UpdateTodoDto } from "../../domain/dtos/index.js";
 
 interface Todo {
   id: number;
