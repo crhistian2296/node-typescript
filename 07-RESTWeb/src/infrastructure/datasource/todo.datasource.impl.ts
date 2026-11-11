@@ -2,6 +2,7 @@ import { prisma } from "../../data/postgres/index.js";
 import { TodoDatasource } from "../../domain/datasources/todo.datasource.js";
 import { CreateTodoDto, UpdateTodoDto } from "../../domain/dtos/index.js";
 import { TodoEntity } from "../../domain/entities/todo.entity.js";
+import { NotFoundError } from "../../domain/errors/not-found.error.js";
 
 export class TodoDatasourceImpl implements TodoDatasource {
   async create(createTodoDto: CreateTodoDto): Promise<TodoEntity> {
@@ -21,7 +22,7 @@ export class TodoDatasourceImpl implements TodoDatasource {
       },
     });
 
-    if (!todo) throw new Error(`Todo with id ${id} not found`);
+    if (!todo) throw new NotFoundError(`Todo with id ${id} not found`);
 
     return TodoEntity.fromData(todo);
   }
@@ -47,7 +48,7 @@ export class TodoDatasourceImpl implements TodoDatasource {
       },
     });
 
-    if (!deletedTodo) throw new Error(`Todo with id ${id} not deleted`);
+    if (!deletedTodo) throw new NotFoundError(`Todo with id ${id} not deleted`);
 
     return TodoEntity.fromData(deletedTodo);
   }

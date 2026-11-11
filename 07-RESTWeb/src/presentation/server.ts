@@ -1,6 +1,8 @@
+import compression from "compression";
 import express, { type Express, type Router } from "express";
 import path from "path";
 import { fileURLToPath } from "url";
+import { errorHandler } from "./error-handler.js";
 
 export class Server {
   private readonly port;
@@ -18,6 +20,7 @@ export class Server {
     // * Middleware to parse JSON bodies
     this.app.use(express.json()); // application/json
     this.app.use(express.urlencoded({ extended: true })); // x-www-form-urlencoded
+    this.app.use(compression());
 
     //* Serve static files from the "public" directory
     this.app.use(express.static(this.publicPath));
@@ -33,6 +36,9 @@ export class Server {
 
       res.sendFile(indexPath);
     });
+
+    this.app.use(errorHandler);
+
     this.app.listen(this.port, () => {
       console.debug(`Server is running on port ${this.port}`);
     });
